@@ -1,0 +1,66 @@
+---
+description: API, axios, Zustand stores в entities
+globs: "**/entities/**/*.{ts,tsx}"
+alwaysApply: false
+---
+
+# API и состояние (entities)
+
+## HTTP
+
+- Инстанс: `shared/api` → `$api` (axios, `baseURL`, `withCredentials` по необходимости)
+- Запросы сущности: `entities/<Entity>/api/requests.ts`
+- URL-хелпер: `shared/lib/api` (например `buildApiUrl(segment, params)`)
+
+```ts
+export const getWallpaperList = async (): Promise<TWallpaper[]> => {
+  const response = await $api.get<TWallpaperListResponse>('/wallpapers', { params: { limit: 1000 } });
+  return response.data.result;
+};
+```
+
+Типизируйте `.get<T>()`, возвращайте `resp.data` или распакованный `result`.
+
+## Zustand
+
+Обёртка `createStore` из `shared/lib/zustand` (immer + devtools в dev).
+
+```ts
+export const useWallpaperStore = createStore(initialState, (setState, getState) => ({
+  fetchWallpaperList: async () => { ... },
+}));
+
+export const { fetchWallpaperList } = useWallpaperStore.getState();
+export const wallpaperModel = { fetchWallpaperList, ... };
+```
+
+- `useWallpaperStore()` — подписка в компонентах
+- `wallpaperModel.*` — actions без ререндера (`useEffect`, submit)
+- Ошибки: `handleError` из `shared/lib/errors` (см. [error-handling.mdc](.cursor/rules/error-handling.mdc))
+
+```ts
+import { handleError } from 'shared/lib/errors';
+
+} catch (error) {
+  const errorMessage = handleError({
+    error,
+    message: t('fetchFailed'),
+    block: 'entities.Wallpaper.useWallpaperStore.fetchWallpaperList',
+    showNotification: false, // если ошибка показывается inline в UI
+  });
+  setState({ error: errorMessage });
+}
+```
+
+## Запреты для pages/widgets
+
+- **Запрещено** вызывать `entities/*/api/requests` из `pages/` и `widgets/` — только через `*Model` / store
+- **Запрещено** `handleError` / `getNotificationApi` в `pages/**/lib/hooks` при работе с entity API
+
+## i18n в store
+
+Fallback-сообщения ошибок — colocated `*.i18next` слайса entity; в store/lib: `import { t } from '../Entity.i18next'` (см. [i18n.mdc](.cursor/rules/i18n.mdc)).
+
+## Экспорт entity
+
+`index.ts`: stores, `*Model`, типы, утилиты из `lib/`. Внешний код импортирует из `entities/<Entity>`, не из внутренних путей `api/requests`.

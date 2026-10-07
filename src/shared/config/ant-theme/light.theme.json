@@ -1,0 +1,76 @@
+{
+  "token": {
+    "colorPrimary": "#44607A",
+    "colorText": "#2D455A",
+    "colorTextSecondary": "#76787A",
+    "colorBgBase": "#F9FAFB",
+    "colorBgLayout": "#F4F7F9",
+    "colorBgContainer": "#FFFFFF",
+    "colorBorder": "#E7EBEE",
+    "colorFillSecondary": "#E7EBEE",
+    "borderRadius": 12,
+    "fontFamily": "'Martel', serif",
+    "fontSize": 16,
+    "lineHeight": 1.5,
+    "fontSizeHeading1": 28,
+    "lineHeightHeading1": 1.2,
+    "fontSizeHeading2": 24,
+    "lineHeightHeading2": 1.2,
+    "fontSizeHeading3": 18,
+    "lineHeightHeading3": 1.3,
+    "fontSizeHeading4": 16,
+    "lineHeightHeading4": 1.5,
+    "fontSizeHeading5": 14,
+    "lineHeightHeading5": 1.5
+  },
+  "components": {
+    "Button": {
+      "controlHeight": 48,
+      "borderRadius": 80,
+      "fontFamily": "'Roboto Mono', monospace",
+      "fontWeight": 600,
+      "boxShadow": "none",
+      "primaryShadow": "none",
+      "paddingInline": 85,
+      "paddingBlock": 15.5
+    },
+    "Card": {
+      "borderRadiusLG": 40,
+      "paddingLG": 24,
+      "borderRadius": 16
+    },
+    "Select": {
+      "controlHeight": 48,
+      "fontFamily": "'Martel', serif"
+    },
+    "DatePicker": {
+      "paddingBlock": 4,
+      "fontFamily": "'Martel', serif"
+    },
+    "Tabs": {
+      "titleFontSize": 18,
+      "fontFamily": "'Roboto Mono', monospace"
+    },
+    "Empty": {
+      "colorTextDisabled": "#76787A",
+      "fontSize": 14
+    },
+    "Typography": {
+      "fontFamily": "'Roboto Mono', monospace",
+      "fontWeightStrong": 700,
+      "titleMarginBottom": 0
+    },
+    "Input": {
+      "fontFamily": "'Martel', serif"
+    },
+    "Statistic": {
+      "titleFontSize": 16,
+      "contentFontSize": 24,
+      "fontFamily": "'Roboto Mono', monospace"
+    },
+    "Form": {
+      "labelFontSize": 14,
+      "labelColor": "#2D455A"
+    }
+  }
+}

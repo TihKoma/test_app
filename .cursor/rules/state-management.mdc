@@ -1,0 +1,49 @@
+---
+description: Zustand state management patterns
+globs: "**/model/*.ts"
+alwaysApply: true
+---
+## Zustand State Management
+
+### Store Structure
+```ts
+import { createStore } from 'shared/lib/zustand';
+
+interface StoreState {
+  data: DataType[];
+  loading: boolean;
+}
+
+const initialState: StoreState = {
+  data: [],
+  loading: false,
+};
+
+export const useDataStore = createStore(
+  initialState,
+  (setState, getState) => {
+    const fetchData = async () => {
+      setState({ loading: true });
+      const data = await api.fetchData();
+      setState({ data, loading: false });
+    };
+
+    return {
+      fetchData,
+    };
+  }
+);
+
+// Export actions individually for direct access
+export const { fetchData } = useDataStore.getState();
+```
+
+### Best Practices
+- Use the custom `createStore` wrapper from `shared/lib/zustand`
+- Define a clear initial state object
+- Place stores in `model` directories
+- Prefix store names with "use" (useXStore)
+- Export actions individually for direct access
+- Handle async operations with loading states
+- Keep stores focused on specific domains
+- Use `setState` for updates and `getState` for reads

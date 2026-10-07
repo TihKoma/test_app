@@ -1,0 +1,55 @@
+---
+description: StatusBadge — плашки статуса primary/secondary
+globs: "**/*.{tsx,scss}"
+alwaysApply: false
+---
+
+# StatusBadge
+
+Figma: node `223:10443`, fileKey `unsaved-mq159kps-k1nalxgp` ([макет](https://www.figma.com/design/RLuwi98Gxu9yv8ljwm9AAh/%D0%9B%D0%BE%D0%B3%D0%BE%D1%82%D0%B8%D0%BF?node-id=223-10443)).
+
+## Когда использовать
+
+- Любой доменный статус (смена, обращение, заказ, оператор) — только `StatusBadge` из `shared/ui`
+- Не использовать inline `<span>` + локальные SCSS для pill-бейджей
+- Не использовать Ant Design `Tag` для доменных статусов
+
+```tsx
+import { StatusBadge } from 'shared/ui';
+import { mapShiftStatusToBadge } from 'entities/Shift';
+
+const badge = mapShiftStatusToBadge(shift.status);
+
+<StatusBadge variant={badge.variant} tone={badge.tone} data-testid="shift-status-tag">
+  {t(labelKey)}
+</StatusBadge>
+```
+
+## Варианты
+
+| Variant | Визуал | Где |
+|---------|--------|-----|
+| `primary` | Pill с полной заливкой (30px) | Header виджета, акцентный статус |
+| `secondary` | Точка 8px + текст, без фона (25px) | Строка сущности, таблицы, appeal row |
+
+## Тоны (`tone`)
+
+Семантические цвета: `info` | `neutral` | `success` | `warning` | `danger`.
+
+- Текст передаётся через i18n (`children`)
+- Маппинг доменного статуса → `{ tone, variant }` — в `entities/*/lib/` или `pages/*/lib/`
+- Цвета — только CSS-токены `--status-*` и `--ws-green-text-mobile`, не хардкод hex в feature-SCSS
+
+## Вне scope
+
+- `durationBadge` (pill с иконкой часов) — отдельный локальный паттерн, не StatusBadge
+- Ant Design `Badge` в маркетинговых виджетах
+
+## Test id
+
+Обязателен для E2E-видимых статусов: `data-testid={TEST_ID...}`.
+
+## Запрещено
+
+- Дублировать `.statusBadge`, `.statusActive`, `.appealStatus` и аналоги в page/widget SCSS
+- Импортировать `StatusBadge` из внутренних путей — только `shared/ui`

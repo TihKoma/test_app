@@ -1,0 +1,27 @@
+---
+description: React development best practices and implementation guidelines
+globs: "*.tsx,*.ts"
+alwaysApply: true
+---
+## React Development Principles
+
+### Core Rules
+- Use functional components with TypeScript
+- Follow React Hooks rules (no conditional hooks)
+- Prefer named exports over default exports
+
+### Component Design
+- Use early returns for conditional rendering
+- Prefix event handlers with "handle" (e.g., handleClick)
+- Implement full accessibility support (aria-*, tabIndex)
+- Use const for function declarations: `const MyComponent = () => {...}`
+
+### State Management
+- Use Zustand for global state (see state-management.mdc)
+- Use React context only for theme/localized state
+- Colocate state with components when possible
+
+### Performance
+- Memoize expensive computations with useMemo
+- Optimize re-renders with React.memo
+- Use lazy loading for heavy components

@@ -1,0 +1,50 @@
+---
+description: TypeScript Type Safety Guidelines
+globs: *.ts,*.tsx,*.d.ts
+alwaysApply: true
+---
+# TypeScript Type Safety Guidelines
+
+## General Principles
+- Avoid using `any` type as it bypasses type checking
+- Use explicit type annotations for function parameters and return types
+- Prefer interfaces over type aliases for object types that can be extended
+- Use strict TypeScript configuration.
+- Leverage TypeScript's built-in utility types.
+- Use generics for reusable type patterns.
+
+## Type Assertions
+- Use type assertions (`as` operator) sparingly and only when you're certain about the type
+- When necessary, assert to a specific type rather than `any`
+- Create wrapper functions to handle type conversions when appropriate
+
+## Import Best Practices
+- Be mindful of import paths, especially when refactoring and moving files
+- Organize imports by source: external libraries first, then internal absolute imports, then relative imports
+- Use path aliases (e.g., `components/...`) consistently for better maintainability
+
+## Code Comments Policy
+- **Minimize comments** - TypeScript's type system should make code self-documenting
+- **All comments MUST be in English** - no Russian or other languages
+- Prefer descriptive type names, variable names, and function names over explanatory comments
+- Only add comments for complex type manipulations or business logic
+
+```typescript
+// ❌ Bad - unnecessary comments in Russian
+interface ExperimentData {
+    id: string; // Уникальный идентификатор эксперимента
+    name: string; // Название эксперимента
+    description?: string; // Опциональное описание
+}
+
+// ✅ Good - self-documenting types without comments
+interface ExperimentData {
+    id: string;
+    name: string;
+    description?: string;
+}
+
+// ✅ Good - minimal English comment only when necessary
+// Union type for experiment status - covers all possible states from API
+type ExperimentStatus = 'draft' | 'running' | 'completed' | 'failed';
+```

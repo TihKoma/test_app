@@ -1,0 +1,38 @@
+---
+description: Index of all project rules
+alwaysApply: true
+---
+# Project Rules Index
+
+## Core Rules
+- [project-context.mdc](.cursor/rules/project-context.mdc) — домен, роли, бизнес-процессы, сущности, бизнес-модель
+- [confidence.mdc](.cursor/rules/confidence.mdc) — confidence assessment
+- [language.mdc](.cursor/rules/language.mdc) — language usage for code and docs
+
+## Architecture & Stack
+- [architecture-fsd.mdc](.cursor/rules/architecture-fsd.mdc) — FSD layers, segments, imports
+- [project-stack.mdc](.cursor/rules/project-stack.mdc) — Vite, Ant Design, Zustand, axios, i18n
+
+## Development Guidelines
+- [design-review skill](skills/design-review/SKILL.md) — `/design-review` visual regression (Figma ↔ Playwright)
+- [react.mdc](.cursor/rules/react.mdc) — React principles and hooks
+- [error-handling.mdc](.cursor/rules/error-handling.mdc) — `handleError`, Ant Design notification (`**/*.{ts,tsx}`)
+- [react-ui.mdc](.cursor/rules/react-ui.mdc) — Ant Design, SCSS modules, `data-testid` (`**/*.{tsx,scss}`)
+- [status-badge.mdc](.cursor/rules/status-badge.mdc) — StatusBadge primary/secondary, тоны, Figma ref (`**/*.{tsx,scss}`)
+- [button.mdc](.cursor/rules/button.mdc) — Button primary/secondary/ghost, workspace CTA (`**/*.{tsx,scss}`)
+- [ant-ui-theme.mdc](.cursor/rules/ant-ui-theme.mdc) — JSON theme, ConfigProvider component config (`**/*.{tsx,ts,json}`)
+- [typescript-type-safety.mdc](.cursor/rules/typescript-type-safety.mdc) — type safety principles
+- [typescript-style.mdc](.cursor/rules/typescript-style.mdc) — naming, exports, branded types (`**/*.{ts,tsx}`)
+- [styling-guidelines.mdc](.cursor/rules/styling-guidelines.mdc) — CSS Modules, SCSS
+- [performance-guidelines.mdc](.cursor/rules/performance-guidelines.mdc) — memoization, lazy loading
+
+## FSD Layers
+- [data-api-stores.mdc](.cursor/rules/data-api-stores.mdc) — `$api`, entity stores, `*Model`, запрет API из pages (`**/entities/**/*.{ts,tsx}`)
+- [state-management.mdc](.cursor/rules/state-management.mdc) — Zustand store patterns (`**/model/*.ts`)
+- [forms-features.mdc](.cursor/rules/forms-features.mdc) — decision tree бизнес-логики, forms, features, pages (`**/{features,widgets,pages}/**/*.{ts,tsx}`)
+- [i18n.mdc](.cursor/rules/i18n.mdc) — colocated translations (`**/*.i18n/**/*.{ts,tsx}`)
+
+## How to Update
+1. Edit the relevant rule file
+2. Update this index when adding or removing rules
+3. Commit changes to version control

@@ -1,0 +1,76 @@
+---
+description: React UI — Ant Design, стили, test id
+globs: "**/*.{tsx,scss}"
+alwaysApply: false
+---
+
+# React и UI
+
+## UI-kit (Ant Design)
+
+- Компоненты: `antd` (`Input`, `Drawer`, `Modal`, `Form`, `Switch`, …)
+- **Workspace/shift CTA**: `Button` из `shared/ui` (см. [button.mdc](.cursor/rules/button.mdc))
+- **Маркетинг/dashboard** (до миграции): `Button` из `antd`
+- Иконки: `@ant-design/icons`
+- Тема и локаль: `AppThemeProvider` → `shared/config/ant-theme/` (JSON + `buildConfigProviderProps`). См. [ant-ui-theme.mdc](.cursor/rules/ant-ui-theme.mdc)
+
+```tsx
+// Workspace / shift
+import { Button } from 'shared/ui';
+
+<Button variant="primary" data-testid="shift-btn-end">{t('endShift')}</Button>
+
+// Marketing / dashboard (legacy, until migrated)
+import { Button } from 'antd';
+import { PlusOutlined } from '@ant-design/icons';
+
+<Button type="primary" icon={<PlusOutlined />}>{t('add')}</Button>
+```
+
+Обёртки форм в `shared/ui/components` строятся на Ant Design + `react-hook-form` (`useController`).
+
+## Стили
+
+- SCSS Modules: `Component.module.scss`, `import s from './Component.module.scss'`
+- Классы: `clsx(s.root, className)`
+- Глобальные переопределения Ant Design — в `app/styles`, не размазывать по feature
+
+## Структура UI в слайсе
+
+```
+features/WallpaperForm/
+  ui/WallpaperForm/WallpaperForm.tsx
+  ui/WallpaperForm/WallpaperForm.module.scss
+  ui/index.ts
+```
+
+## Test id
+
+- Константы: `shared/const/testid.ts` (объект или фабрика ключей)
+- В UI: `data-testid={TEST_ID.page.element}` (пробрасывать в Ant Design через props, где поддерживается)
+
+Новый интерактив — сразу ключ в `TEST_ID`.
+
+## Роутинг
+
+Страницы — `React.lazy` + `Suspense` в `src/index.tsx` (роутинг). Пути — `shared/const/routes`.
+
+## Модалки и drawer
+
+Ant Design: `Modal`, `Drawer` (controlled: `open` + `onClose`) или `App.useApp()` для imperative API.
+
+## Ошибки (notification)
+
+Для user-facing ошибок — `handleError` из `shared/lib/errors`, не `message.error`. Показывает Ant Design `notification.error` с `title` + `description`. Holder монтируется в `AppThemeProvider` внутри `ConfigProvider`. См. [error-handling.mdc](.cursor/rules/error-handling.mdc).
+
+## Краткие toast (message)
+
+Для success / info / warning / loading — `showMessage` из `shared/ui`:
+
+```tsx
+import { showMessage } from 'shared/ui';
+
+showMessage({ type: 'success', content: t('saved') });
+```
+
+Holder (`message.useMessage`) — в `AppThemeProvider`. Не использовать `message.open` / `message.useMessage` из `antd` напрямую. См. [error-handling.mdc](.cursor/rules/error-handling.mdc).

@@ -1,0 +1,99 @@
+---
+alwaysApply: true
+---
+
+# Confidence Assessment Guide
+
+This document describes how to assess and communicate confidence levels in proposed solutions and code changes.
+
+## Confidence Levels
+
+| Level          | Range   | Description                                                                    |
+| -------------- | ------- | ------------------------------------------------------------------------------ |
+| Low            | 0-30%   | Initial idea with many unknowns, requires additional research                  |
+| Moderately Low | 31-50%  | Problem is understood, but solution is uncertain, alternative approaches exist |
+| Moderate       | 51-70%  | Working solution available, but risks and unaccounted factors exist            |
+| High           | 71-85%  | Confident in solution, but certain nuances to consider                         |
+| Very High      | 86-100% | Complete confidence, solution verified and tested                              |
+
+## Key Principles
+
+1. **No High Confidence Without Testing**
+
+    - Never assign 70%+ confidence to untested solutions
+    - Always verify solutions before claiming high confidence
+
+2. **Risk Assessment**
+
+    - Consider all risks and unknown factors
+    - Be transparent about untested solutions
+    - Account for previous failures and their lessons
+
+3. **Learning from Experience**
+    - Track and learn from previous failed attempts
+    - Document successful approaches for future use
+    - Evolve approved solutions to improve future implementations
+
+## Communication Examples
+
+Good:
+
+```
+"I have a solution that looks correct but needs testing. Confidence: 60%"
+"This approach failed before, so confidence is low: 30%"
+"Solution verified in other areas of the project. Confidence: 75%"
+```
+
+Bad:
+
+```
+"Haven't tested but confident it will work. Confidence: 90%" ❌
+"Seems like a poor approach but might work. Confidence: 80%" ❌
+"Looks simple enough. Confidence: 95%" ❌
+```
+
+## Requirements
+
+1. **Before Implementation**
+
+    - Assess confidence level (0-100%)
+    - Ask questions until reaching at least 70% confidence
+    - Document risks and assumptions
+
+2. **After Code Review Feedback**
+
+    - Document feedback
+    - Update approach based on reviewer comments
+    - Reassess confidence level
+    - Apply learnings to future solutions
+
+3. **After Successful Implementation**
+    - Analyze what made the solution successful
+    - Document approach for future use
+    - Note specific patterns or techniques used
+
+## Prohibited Practices
+
+1. **Never**:
+
+    - Assign 85%+ confidence to untested solutions
+    - Ignore previous failures
+    - Exaggerate confidence levels
+    - Repeat mistakes after receiving feedback
+
+2. **Always**:
+    - Learn from code review feedback
+    - Document successful patterns
+    - Evolve approved solutions
+    - Build expertise through iterations
+
+## Confidence Statement
+
+End each proposal with a confidence statement:
+
+```
+Confidence Level: XX%
+Rationale: [Brief explanation of confidence level]
+Risks: [Any identified risks]
+Previous Experience: [Related successes/failures]
+```

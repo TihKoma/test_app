@@ -1,0 +1,47 @@
+---
+description: Локализация — colocated i18n в слайсах
+globs: "**/*.i18n/**/*.{ts,tsx}"
+alwaysApply: false
+---
+
+# i18n
+
+## Colocated переводы
+
+У каждого слайса папка `<SliceName>.i18n/`:
+
+```
+features/WallpaperForm/WallpaperForm.i18n/
+  ru.ts      // export const ru = { titleLabel: '...' }
+  en.ts
+  index.ts
+  useTranslation.ts
+```
+
+## useTranslation
+
+Хелпер `createTranslation` в `shared/lib/i18n` (обёртка над `react-i18next`):
+
+```ts
+import { createTranslation } from 'shared/lib/i18n';
+import { en } from './en';
+import { ru } from './ru';
+
+export const { useTranslation, t } = createTranslation<typeof ru>({ ru, en });
+```
+
+В компоненте: `import { useTranslation } from '../../WallpaperForm.i18n'`.
+
+Ant Design: передать `locale` в `ConfigProvider` (`antd/locale/ru_RU`, `en_US`).
+
+## Вне React
+
+В store/lib: `import { t } from '../lib'` или из `*.i18n` — сообщения ошибок.
+
+## Правила текстов
+
+- Ключи — camelCase (`fieldRequired`, не `err1`)
+- `ru` и `en` синхронны по ключам
+- Не размазывать JSON по проекту — словари только в `*.i18n` слайсов и `app/i18n`
+
+Глобальный i18next — в `shared/lib/i18n.ts`.

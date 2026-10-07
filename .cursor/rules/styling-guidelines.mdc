@@ -1,0 +1,35 @@
+---
+description: Component styling guidelines
+globs: "*.css,*.scss,*.module.css,*.module.scss"
+alwaysApply: true
+---
+
+# Styling
+
+## Mandatory Standards (MUST)
+- Use CSS Modules for all new components
+- Avoid global styles except for base theme styling
+- Class names should be in kebab-case in CSS modules and camelCase in components (kebab-case to camelCase conversion is handled by Vite during build)
+- Avoid deep selector nesting (maximum 3 levels)
+- Use CSS variables for colors and sizes from the HRDS UI system
+
+## Recommendations (SHOULD)
+- Group styles by components
+- Use variables for colors and sizes
+- Avoid !important
+- Use modern CSS functions (clamp, min, max)
+- Optimize animations with will-change and transform
+
+## Examples
+```css
+/* ✅ Correct (CSS Modules) */
+/* ComponentName.module.css */
+.button-primary {
+  background: var(--hr-color-surface-0);
+}
+
+/* ❌ Incorrect */
+/* styles.module.css */
+.buttonPrimary {
+  background: #fff;
+}

@@ -1,0 +1,75 @@
+---
+description: Ant Design JSON theme — tokens, ConfigProvider component config, semantic props
+globs: "**/*.{tsx,ts,json}"
+alwaysApply: false
+---
+
+# Ant Design JSON Theme
+
+## Single source of truth
+
+Visual styling for Ant Design components lives in `shared/config/ant-theme/`:
+
+- `light.theme.json` / `dark.theme.json` — Theme Editor format (`token` + `components`)
+- `componentConfig.json` — global `ConfigProvider` component props (`button`, `card`, `datePicker`, …)
+
+Do not hardcode hex/rgba colors for Ant components in TSX or SCSS.
+
+## Three official levels
+
+1. **Design Tokens** → `ConfigProvider theme` via `buildAntTheme(mode)`
+2. **Global component defaults** → `componentConfig.json` → `ConfigProvider button/card/...`
+3. **Instance** → semantic props in JSX (`type`, `size`, `variant`, `shape`) + optional `classNames`/`styles` overrides
+
+Page-local overrides → nested `ConfigProvider` (see `pages/DashboardPage/config/dashboard.componentConfig.ts`).
+
+Custom non-Ant markup → `theme.useToken()`, not hardcoded colors.
+
+## Workspace Button (shared/ui)
+
+По аналогии со `StatusBadge` (`--status-*`):
+
+- Семантические цвета CTA → `--btn-*` в `shared/styles/_button.scss`
+- Геометрия workspace (35px, radius 8px, Inter 14px) → `shared/ui/Button/Button.module.scss`, **не** глобальный `components.Button` в JSON
+- Глобальный `components.Button` в `light.theme.json` / `dark.theme.json` — для marketing/dashboard antd-кнопок до отдельной миграции
+- Варианты `primary` / `secondary` / `ghost` — через `shared/ui/Button`, не через локальный SCSS в pages/widgets
+
+При изменении макета workspace CTA: обновить `_button.scss` и `Button.module.scss` (включая `--ant-btn-border-color*` для antd 6).
+
+## SCSS modules
+
+Use SCSS only for layout: grid, flex, gap, breakpoints, positioning.
+
+Forbidden in page/feature SCSS:
+
+- `:global .ant-*` color/typography overrides
+- hardcoded brand colors (`#44607A`, etc.)
+- `getComponentPreset` or similar custom preset helpers
+
+## Workflow
+
+1. Edit tokens in [Theme Editor](https://ant.design/theme-editor)
+2. Export to `light.theme.json` / `dark.theme.json`
+3. Put global semantic defaults in `componentConfig.json`
+4. Wire via `AppThemeProvider` — do not inline `theme={{...}}` in `index.tsx`
+
+## Examples
+
+```tsx
+// ✅ Global theme from JSON
+<AppThemeProvider>{children}</AppThemeProvider>
+
+// ✅ Semantics in JSX, visual in JSON
+<Button type="primary" size="large" shape="round">{t('btnAdd')}</Button>
+
+// ✅ Tokens for custom blocks
+const { token } = theme.useToken();
+<div style={{ backgroundColor: token.colorBgLayout }} />
+
+// ✅ Page-local nested ConfigProvider
+<ConfigProvider {...dashboardComponentConfig}>...</ConfigProvider>
+
+// ❌
+<button style={{ background: '#44607A' }}>...</button>
+<Button {...getComponentPreset('Button', 'bannerPrimary')} />
+```

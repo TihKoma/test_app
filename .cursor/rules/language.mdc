@@ -1,0 +1,20 @@
+---
+description: Language usage guidelines for documentation and code
+globs: "**/*.mdc, **/*.ts, **/*.tsx, **/*.js"
+alwaysApply: true
+---
+## Language Rules
+
+1. **Rules and Memory Bank**:
+   - Always use English
+   - Translate any non-English content to English
+
+2. **Code Comments**:
+   - Use English only (as per TypeScript safety rules)
+
+3. **Other Documentation**:
+   - Use Russian for user-facing documentation
+   - Use English for technical design documents
+
+4. **Chat Communication**:
+   - Use Russian when interacting with users

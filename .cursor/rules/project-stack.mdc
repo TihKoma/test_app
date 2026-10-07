@@ -1,0 +1,31 @@
+---
+description: Стек проекта — открытые технологии
+alwaysApply: true
+---
+
+# Стек
+
+| Область | Технология |
+|---------|------------|
+| Сборка | Vite 7, ESM |
+| UI | Ant Design 6 + `@ant-design/icons` |
+| Состояние | Zustand + immer |
+| Формы | react-hook-form |
+| HTTP | axios (`shared/api` → `$api`) |
+| i18n | i18next + colocated `createTranslation` |
+| Роутер | react-router 7 |
+| Стили | SCSS Modules |
+| Линт | ESLint + Prettier + Stylelint (конфигурация в `.config/`) |
+| Test id | `data-testid` в UI для ручной QA |
+
+## Команды качества
+
+```bash
+npm run type-check && npm run eslint && npm run stylelint
+```
+
+Дополнительно: `eslint:fix`, `stylelint:fix`, `format`, агрегирующий `lint`.
+
+В dev-сервере: `vite-plugin-checker` (TypeScript + ESLint + Stylelint overlay).
+
+Правила описывают **подход** (FSD, public API, colocated i18n, api/model/ui). Стек — общедоступные пакеты из npm.

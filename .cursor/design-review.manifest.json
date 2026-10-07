@@ -1,0 +1,990 @@
+{
+  "defaults": {
+    "appBaseUrl": "http://localhost:3000",
+    "viewports": {
+      "desktop": { "width": 1440, "height": 900 },
+      "mobile": { "width": 390, "height": 844 }
+    },
+    "figma": {
+      "scale": 2,
+      "clip": true,
+      "format": "PNG"
+    },
+    "loop": {
+      "maxIterations": 5,
+      "minConfidence": 85
+    }
+  },
+  "screens": [
+    {
+      "id": "shift-page-worker-order-work",
+      "label": "Shift page / Worker order work card",
+      "app": {
+        "path": "/shift/1",
+        "waitForGone": "loading",
+        "mockEnv": {
+          "VITE_USE_SHIFT_MOCK": "true",
+          "VITE_USE_SHIFT_MOCK_VARIANT": "worker-queue",
+          "VITE_USE_ORDER_MOCK": "true"
+        },
+        "screenshotTarget": "[data-testid='client-work-card']"
+      },
+      "figma": {
+        "fileKey": "unsaved-mrax59yu-8l5wwvi8",
+        "variants": {
+          "light-desktop": { "nodeId": "337:17362" },
+          "dark-desktop": { "nodeId": "338:21237" },
+          "light-mobile": { "nodeId": "338:17908" },
+          "dark-mobile": { "nodeId": "338:21689" }
+        }
+      }
+    },
+    {
+      "id": "shift-page-serving",
+      "label": "Shift page / ClientWork serving",
+      "app": {
+        "path": "/shift/1",
+        "waitForGone": "loading",
+        "mockEnv": {
+          "VITE_USE_SHIFT_MOCK": "true",
+          "VITE_USE_SHIFT_MOCK_VARIANT": "serving"
+        },
+        "screenshotTarget": "[data-testid='client-work-card']"
+      },
+      "figma": {
+        "fileKey": "unsaved-mqweaniz-3knu49nq",
+        "variants": {
+          "light-desktop": { "nodeId": "6:8519" },
+          "dark-desktop": { "nodeId": "289:12586" },
+          "light-mobile": {
+            "skip": true,
+            "reason": "No Figma serving frame for mobile; 5:5129 is full page queue state"
+          },
+          "dark-mobile": {
+            "skip": true,
+            "reason": "No Figma serving frame for mobile dark; 289:10174 is full page"
+          }
+        }
+      }
+    },
+    {
+      "id": "complete-appeal-modal",
+      "label": "Complete appeal confirmation modal",
+      "app": {
+        "path": "/shift/1",
+        "waitForGone": "loading",
+        "mockEnv": {
+          "VITE_USE_SHIFT_MOCK": "true",
+          "VITE_USE_SHIFT_MOCK_VARIANT": "serving",
+          "VITE_USE_APPEAL_MOCK": "true"
+        },
+        "screenshotTarget": "[data-testid='complete-appeal-modal']",
+        "openSteps": [
+          { "clickTestId": "appeals-queue-row-14" },
+          { "clickTestId": "appeal-drawer-action-complete" }
+        ]
+      },
+      "figma": {
+        "fileKey": "unsaved-mq6o84g6-aflw3u1l",
+        "variants": {
+          "light-desktop": { "nodeId": "220:9974" },
+          "dark-desktop": { "nodeId": "457:22883" },
+          "light-mobile": {
+            "skip": true,
+            "reason": "No mobile frame in Figma for complete-appeal modal yet"
+          },
+          "dark-mobile": {
+            "skip": true,
+            "reason": "No mobile frame in Figma for complete-appeal modal yet"
+          }
+        }
+      }
+    },
+    {
+      "id": "return-to-queue-modal",
+      "label": "Return to queue confirmation modal",
+      "app": {
+        "path": "/shift/1",
+        "waitForGone": "loading",
+        "mockEnv": {
+          "VITE_USE_SHIFT_MOCK": "true",
+          "VITE_USE_SHIFT_MOCK_VARIANT": "serving",
+          "VITE_USE_APPEAL_MOCK": "true"
+        },
+        "screenshotTarget": "[data-testid='return-to-queue-modal']",
+        "openSteps": [
+          { "clickTestId": "appeals-queue-row-14" },
+          { "clickTestId": "appeal-drawer-action-returnToQueue" }
+        ]
+      },
+      "figma": {
+        "fileKey": "unsaved-mq6o84g6-aflw3u1l",
+        "variants": {
+          "light-desktop": { "nodeId": "220:9892" },
+          "dark-desktop": { "nodeId": "457:22820" },
+          "light-mobile": {
+            "skip": true,
+            "reason": "No mobile frame in Figma for return-to-queue modal yet"
+          },
+          "dark-mobile": {
+            "skip": true,
+            "reason": "No mobile frame in Figma for return-to-queue modal yet"
+          }
+        }
+      }
+    },
+    {
+      "id": "cancel-appeal-modal",
+      "label": "Cancel appeal modal",
+      "app": {
+        "path": "/shift/1",
+        "waitForGone": "loading",
+        "mockEnv": {
+          "VITE_USE_SHIFT_MOCK": "true",
+          "VITE_USE_SHIFT_MOCK_VARIANT": "serving",
+          "VITE_USE_APPEAL_MOCK": "true"
+        },
+        "screenshotTarget": "[data-testid='cancel-appeal-modal']",
+        "openSteps": [
+          { "clickTestId": "appeals-queue-row-14" },
+          { "clickTestId": "appeal-drawer-action-cancel" }
+        ]
+      },
+      "figma": {
+        "fileKey": "unsaved-mqsl6k20-q9jzzh3a",
+        "variants": {
+          "light-desktop": { "nodeId": "220:9922" },
+          "dark-desktop": { "nodeId": "457:22844" },
+          "light-mobile": {
+            "skip": true,
+            "reason": "No mobile frame in Figma for cancel-appeal modal yet"
+          },
+          "dark-mobile": {
+            "skip": true,
+            "reason": "No mobile frame in Figma for cancel-appeal modal yet"
+          }
+        }
+      }
+    },
+    {
+      "id": "take-in-work-appeal-modal",
+      "label": "Take in work confirmation modal",
+      "app": {
+        "path": "/shift/1",
+        "waitForGone": "loading",
+        "mockEnv": {
+          "VITE_USE_SHIFT_MOCK": "true",
+          "VITE_USE_SHIFT_MOCK_VARIANT": "active",
+          "VITE_USE_APPEAL_MOCK": "true"
+        },
+        "screenshotTarget": ".shift-modal-root .ant-modal-container",
+        "openSteps": [
+          { "clickTestId": "appeals-queue-row-1583" },
+          { "clickTestId": "appeal-drawer-action-takeInWork" }
+        ]
+      },
+      "figma": {
+        "fileKey": "unsaved-mqweaniz-3knu49nq",
+        "variants": {
+          "light-desktop": { "nodeId": "825:13991" },
+          "dark-desktop": { "nodeId": "825:14010" },
+          "light-mobile": {
+            "skip": true,
+            "reason": "No mobile frame in Figma for take-in-work modal yet"
+          },
+          "dark-mobile": {
+            "skip": true,
+            "reason": "No mobile frame in Figma for take-in-work modal yet"
+          }
+        }
+      }
+    },
+    {
+      "id": "reinvite-appeal-modal",
+      "label": "Reinvite client confirmation modal",
+      "app": {
+        "path": "/shift/1",
+        "waitForGone": "loading",
+        "mockEnv": {
+          "VITE_USE_SHIFT_MOCK": "true",
+          "VITE_USE_SHIFT_MOCK_VARIANT": "serving",
+          "VITE_USE_APPEAL_MOCK": "true"
+        },
+        "screenshotTarget": "[data-testid='reinvite-appeal-modal']",
+        "openSteps": [
+          { "clickTestId": "client-work-btn-open-appeal" },
+          { "clickTestId": "appeal-drawer-action-invite-client" }
+        ]
+      },
+      "figma": {
+        "fileKey": "RLuwi98Gxu9yv8ljwm9AAh",
+        "variants": {
+          "light-desktop": { "nodeId": "808:13955" },
+          "dark-desktop": { "nodeId": "808:13972" },
+          "light-mobile": {
+            "skip": true,
+            "reason": "No mobile frame in Figma for reinvite-appeal modal yet"
+          },
+          "dark-mobile": {
+            "skip": true,
+            "reason": "No mobile frame in Figma for reinvite-appeal modal yet"
+          }
+        }
+      }
+    },
+    {
+      "id": "appeal-drawer-reinvite-active",
+      "label": "Appeal drawer / reinvite button active",
+      "app": {
+        "path": "/shift/1",
+        "waitForGone": "loading",
+        "mockEnv": {
+          "VITE_USE_SHIFT_MOCK": "true",
+          "VITE_USE_SHIFT_MOCK_VARIANT": "serving",
+          "VITE_USE_APPEAL_MOCK": "true"
+        },
+        "screenshotTarget": "[data-testid='appeal-drawer-action-invite-client']",
+        "openSteps": {
+          "clickTestId": "client-work-btn-open-appeal"
+        }
+      },
+      "figma": {
+        "fileKey": "RLuwi98Gxu9yv8ljwm9AAh",
+        "variants": {
+          "light-desktop": { "nodeId": "586:9960" },
+          "dark-desktop": {
+            "skip": true,
+            "reason": "Dark frame for active reinvite button TBD via get_node after Figma connect"
+          },
+          "light-mobile": {
+            "skip": true,
+            "reason": "No mobile frame in Figma for reinvite button yet"
+          },
+          "dark-mobile": {
+            "skip": true,
+            "reason": "No mobile frame in Figma for reinvite button yet"
+          }
+        }
+      }
+    },
+    {
+      "id": "appeal-drawer-reinvite-cooldown",
+      "label": "Appeal drawer / reinvite button cooldown",
+      "app": {
+        "path": "/shift/1",
+        "waitForGone": "loading",
+        "mockEnv": {
+          "VITE_USE_SHIFT_MOCK": "true",
+          "VITE_USE_SHIFT_MOCK_VARIANT": "serving",
+          "VITE_USE_APPEAL_MOCK": "true",
+          "VITE_APPEAL_MOCK_REINVITE_COOLDOWN": "true"
+        },
+        "screenshotTarget": "[data-testid='appeal-drawer-reinvite-cooldown']",
+        "openSteps": {
+          "clickTestId": "client-work-btn-open-appeal"
+        },
+        "waitFor": "Будет доступно через"
+      },
+      "figma": {
+        "fileKey": "RLuwi98Gxu9yv8ljwm9AAh",
+        "variants": {
+          "light-desktop": { "nodeId": "586:9909" },
+          "dark-desktop": {
+            "skip": true,
+            "reason": "Dark frame for reinvite cooldown TBD via get_node after Figma connect"
+          },
+          "light-mobile": {
+            "skip": true,
+            "reason": "No mobile frame in Figma for reinvite cooldown yet"
+          },
+          "dark-mobile": {
+            "skip": true,
+            "reason": "No mobile frame in Figma for reinvite cooldown yet"
+          }
+        }
+      }
+    },
+    {
+      "id": "complete-appeal-success",
+      "label": "Complete appeal / post-submit client work",
+      "app": {
+        "path": "/shift/1",
+        "waitForGone": "loading",
+        "mockEnv": {
+          "VITE_USE_SHIFT_MOCK": "true",
+          "VITE_USE_SHIFT_MOCK_VARIANT": "serving",
+          "VITE_USE_APPEAL_MOCK": "true"
+        },
+        "screenshotTarget": "[data-testid='client-work-card']",
+        "openSteps": [
+          { "clickTestId": "appeals-queue-row-14" },
+          { "clickTestId": "appeal-drawer-action-complete" },
+          { "clickTestId": "complete-appeal-btn-submit" }
+        ],
+        "waitFor": "Свободен"
+      },
+      "figma": {
+        "fileKey": "unsaved-mq6o84g6-aflw3u1l",
+        "variants": {
+          "light-desktop": { "skip": true, "reason": "Post-submit state; compare app behavior only" },
+          "dark-desktop": { "skip": true, "reason": "Post-submit state; compare app behavior only" },
+          "light-mobile": { "skip": true, "reason": "Post-submit state; compare app behavior only" },
+          "dark-mobile": { "skip": true, "reason": "Post-submit state; compare app behavior only" }
+        }
+      }
+    },
+    {
+      "id": "create-order-modal",
+      "label": "Create order modal",
+      "app": {
+        "path": "/shift/1",
+        "waitForGone": "loading",
+        "mockEnv": {
+          "VITE_USE_SHIFT_MOCK": "true",
+          "VITE_USE_SHIFT_MOCK_VARIANT": "serving",
+          "VITE_USE_APPEAL_MOCK": "true",
+          "VITE_USE_ORDER_MOCK": "true"
+        },
+        "screenshotTarget": "[data-testid='create-order-modal'] .ant-modal-container",
+        "openSteps": [
+          { "clickTestId": "client-work-btn-open-appeal" },
+          { "clickTestId": "appeal-drawer-action-createOrder" }
+        ]
+      },
+      "figma": {
+        "fileKey": "unsaved-mq6o84g6-aflw3u1l",
+        "variants": {
+          "light-desktop": { "nodeId": "28:10310" },
+          "dark-desktop": { "nodeId": "457:20395" },
+          "light-mobile": {
+            "skip": true,
+            "reason": "No mobile frame in Figma for create-order modal yet"
+          },
+          "dark-mobile": {
+            "skip": true,
+            "reason": "No mobile frame in Figma for create-order modal yet"
+          }
+        }
+      }
+    },
+    {
+      "id": "edit-order-modal",
+      "label": "Edit order modal",
+      "app": {
+        "path": "/shift/1",
+        "waitForGone": "loading",
+        "mockEnv": {
+          "VITE_USE_SHIFT_MOCK": "true",
+          "VITE_USE_SHIFT_MOCK_VARIANT": "serving",
+          "VITE_USE_ORDER_MOCK": "true"
+        },
+        "screenshotTarget": "[data-testid='edit-order-modal'] .ant-modal-container",
+        "openSteps": [
+          { "clickTestId": "orders-queue-row-1" },
+          { "clickTestId": "order-drawer-action-edit" }
+        ]
+      },
+      "figma": {
+        "fileKey": "RLuwi98Gxu9yv8ljwm9AAh",
+        "variants": {
+          "light-desktop": { "nodeId": "701:12797" },
+          "dark-desktop": { "nodeId": "769:35311" },
+          "light-mobile": {
+            "skip": true,
+            "reason": "No mobile frame in Figma for edit-order modal yet"
+          },
+          "dark-mobile": {
+            "skip": true,
+            "reason": "No mobile frame in Figma for edit-order modal yet"
+          }
+        }
+      }
+    },
+    {
+      "id": "shift-page-orders-queue",
+      "label": "Shift page / Orders queue widget",
+      "app": {
+        "path": "/shift/1",
+        "waitForGone": "loading",
+        "mockEnv": {
+          "VITE_USE_SHIFT_MOCK": "true",
+          "VITE_USE_SHIFT_MOCK_VARIANT": "serving",
+          "VITE_USE_ORDER_MOCK": "true",
+          "VITE_USE_APPEAL_MOCK": "true"
+        },
+        "screenshotTarget": "[data-testid='orders-queue-card']"
+      },
+      "figma": {
+        "fileKey": "unsaved-mq6o84g6-aflw3u1l",
+        "variants": {
+          "light-desktop": { "nodeId": "294:7608" },
+          "dark-desktop": { "nodeId": "296:13746" },
+          "light-mobile": { "nodeId": "296:12374" },
+          "dark-mobile": { "nodeId": "296:17023" }
+        }
+      }
+    },
+    {
+      "id": "shift-page-appeals-queue",
+      "label": "Shift page / Appeals queue widget",
+      "app": {
+        "path": "/shift/1",
+        "waitForGone": "loading",
+        "mockEnv": {
+          "VITE_USE_SHIFT_MOCK": "true",
+          "VITE_USE_SHIFT_MOCK_VARIANT": "serving",
+          "VITE_USE_APPEAL_MOCK": "true"
+        },
+        "screenshotTarget": "[data-testid='appeals-queue-card']"
+      },
+      "figma": {
+        "fileKey": "unsaved-mq6o84g6-aflw3u1l",
+        "variants": {
+          "light-desktop": { "nodeId": "294:7149" },
+          "dark-desktop": { "nodeId": "296:13623" },
+          "light-mobile": { "nodeId": "296:11954" },
+          "dark-mobile": { "nodeId": "296:16936" }
+        }
+      }
+    },
+    {
+      "id": "appeal-drawer",
+      "label": "Appeal drawer / serving",
+      "app": {
+        "path": "/shift/1",
+        "waitForGone": "loading",
+        "mockEnv": {
+          "VITE_USE_SHIFT_MOCK": "true",
+          "VITE_USE_SHIFT_MOCK_VARIANT": "serving",
+          "VITE_USE_APPEAL_MOCK": "true"
+        },
+        "screenshotTarget": "[data-testid='appeal-drawer']",
+        "openSteps": {
+          "clickTestId": "client-work-btn-open-appeal"
+        }
+      },
+      "figma": {
+        "fileKey": "unsaved-mq6o84g6-aflw3u1l",
+        "variants": {
+          "light-desktop": { "nodeId": "28:6284" },
+          "dark-desktop": { "nodeId": "457:21524" },
+          "light-mobile": { "nodeId": "492:9436" },
+          "dark-mobile": { "nodeId": "494:10319" }
+        }
+      }
+    },
+    {
+      "id": "button-link-variant",
+      "label": "Button / link variant",
+      "app": {
+        "path": "/shift/1",
+        "waitForGone": "loading",
+        "mockEnv": {
+          "VITE_USE_SHIFT_MOCK": "true",
+          "VITE_USE_SHIFT_MOCK_VARIANT": "serving",
+          "VITE_USE_APPEAL_MOCK": "true"
+        },
+        "screenshotTarget": "[data-testid='appeal-drawer-link-business-point']",
+        "openSteps": {
+          "clickTestId": "client-work-btn-open-appeal"
+        }
+      },
+      "figma": {
+        "fileKey": "unsaved-mq6o84g6-aflw3u1l",
+        "variants": {
+          "light-desktop": { "nodeId": "282:6548" },
+          "dark-desktop": { "nodeId": "283:6647" },
+          "light-mobile": {
+            "skip": true,
+            "reason": "Link button component set has desktop-only frames"
+          },
+          "dark-mobile": {
+            "skip": true,
+            "reason": "Link button component set has desktop-only frames"
+          }
+        }
+      }
+    },
+    {
+      "id": "order-drawer-new",
+      "label": "Order drawer / new",
+      "app": {
+        "path": "/shift/1",
+        "waitForGone": "loading",
+        "mockEnv": {
+          "VITE_USE_SHIFT_MOCK": "true",
+          "VITE_USE_SHIFT_MOCK_VARIANT": "serving",
+          "VITE_USE_ORDER_MOCK": "true"
+        },
+        "screenshotTarget": "[data-testid='order-drawer']",
+        "openSteps": { "clickTestId": "orders-queue-row-1" }
+      },
+      "figma": {
+        "fileKey": "unsaved-mrtdvt1u-mnlm8b87",
+        "variants": {
+          "light-desktop": { "nodeId": "304:23355" },
+          "dark-desktop": { "nodeId": "769:33489" },
+          "light-mobile": { "nodeId": "625:11639" },
+          "dark-mobile": { "nodeId": "769:34504" }
+        }
+      }
+    },
+    {
+      "id": "order-drawer-in-progress",
+      "label": "Order drawer / in progress",
+      "app": {
+        "path": "/shift/1",
+        "waitForGone": "loading",
+        "mockEnv": {
+          "VITE_USE_SHIFT_MOCK": "true",
+          "VITE_USE_SHIFT_MOCK_VARIANT": "serving",
+          "VITE_USE_ORDER_MOCK": "true"
+        },
+        "screenshotTarget": "[data-testid='order-drawer']",
+        "openSteps": [
+          { "clickTestId": "orders-queue-tab-label-in_progress" },
+          { "clickTestId": "orders-queue-row-5" }
+        ]
+      },
+      "figma": {
+        "fileKey": "unsaved-mrtdvt1u-mnlm8b87",
+        "variants": {
+          "light-desktop": { "nodeId": "304:23659" },
+          "dark-desktop": { "nodeId": "629:13667" },
+          "light-mobile": { "nodeId": "629:12348" },
+          "dark-mobile": { "nodeId": "629:14572" }
+        }
+      }
+    },
+    {
+      "id": "order-drawer-ready",
+      "label": "Order drawer / ready",
+      "app": {
+        "path": "/shift/1",
+        "waitForGone": "loading",
+        "mockEnv": {
+          "VITE_USE_SHIFT_MOCK": "true",
+          "VITE_USE_SHIFT_MOCK_VARIANT": "serving",
+          "VITE_USE_ORDER_MOCK": "true"
+        },
+        "screenshotTarget": "[data-testid='order-drawer']",
+        "openSteps": [
+          { "clickTestId": "orders-queue-tab-label-ready" },
+          { "clickTestId": "orders-queue-row-6" }
+        ]
+      },
+      "figma": {
+        "fileKey": "unsaved-mq6o84g6-aflw3u1l",
+        "variants": {
+          "light-desktop": { "nodeId": "304:24384" },
+          "dark-desktop": { "nodeId": "629:13823" },
+          "light-mobile": { "nodeId": "629:12667" },
+          "dark-mobile": { "nodeId": "629:14731" }
+        }
+      }
+    },
+    {
+      "id": "order-drawer-completed",
+      "label": "Order drawer / completed",
+      "app": {
+        "path": "/shift/1",
+        "waitForGone": "loading",
+        "mockEnv": {
+          "VITE_USE_SHIFT_MOCK": "true",
+          "VITE_USE_SHIFT_MOCK_VARIANT": "serving",
+          "VITE_USE_ORDER_MOCK": "true"
+        },
+        "screenshotTarget": "[data-testid='order-drawer']",
+        "openSteps": [
+          { "clickTestId": "orders-queue-tab-label-completed" },
+          { "clickTestId": "orders-queue-row-7" }
+        ]
+      },
+      "figma": {
+        "fileKey": "unsaved-mq6o84g6-aflw3u1l",
+        "variants": {
+          "light-desktop": { "nodeId": "304:24533" },
+          "dark-desktop": { "nodeId": "629:13990" },
+          "light-mobile": { "nodeId": "629:12888" },
+          "dark-mobile": { "nodeId": "629:14900" }
+        }
+      }
+    },
+    {
+      "id": "order-drawer-canceled",
+      "label": "Order drawer / canceled",
+      "app": {
+        "path": "/shift/1",
+        "waitForGone": "loading",
+        "mockEnv": {
+          "VITE_USE_SHIFT_MOCK": "true",
+          "VITE_USE_SHIFT_MOCK_VARIANT": "serving",
+          "VITE_USE_ORDER_MOCK": "true"
+        },
+        "screenshotTarget": "[data-testid='order-drawer']",
+        "openSteps": [
+          { "clickTestId": "orders-queue-tab-label-canceled" },
+          { "clickTestId": "orders-queue-row-8" }
+        ]
+      },
+      "figma": {
+        "fileKey": "unsaved-mq6o84g6-aflw3u1l",
+        "variants": {
+          "light-desktop": { "nodeId": "304:24687" },
+          "dark-desktop": { "nodeId": "629:14169" },
+          "light-mobile": { "nodeId": "629:13171" },
+          "dark-mobile": { "nodeId": "629:15081" }
+        }
+      }
+    },
+    {
+      "id": "order-drawer-inactive-shift-banner",
+      "label": "Order drawer / inactive shift banner",
+      "app": {
+        "path": "/shift/1",
+        "waitForGone": "loading",
+        "mockEnv": {
+          "VITE_USE_SHIFT_MOCK": "true",
+          "VITE_USE_SHIFT_MOCK_VARIANT": "inactive",
+          "VITE_USE_ORDER_MOCK": "true"
+        },
+        "screenshotTarget": "[data-testid='order-drawer-inactive-shift-banner']",
+        "openSteps": { "clickTestId": "orders-queue-row-1" }
+      },
+      "figma": {
+        "fileKey": "unsaved-mrax59yu-8l5wwvi8",
+        "variants": {
+          "light-desktop": { "nodeId": "769:27732" },
+          "dark-desktop": { "nodeId": "769:31335" },
+          "light-mobile": {
+            "skip": true,
+            "reason": "No mobile frame in Figma for inactive shift banner yet"
+          },
+          "dark-mobile": {
+            "skip": true,
+            "reason": "No mobile frame in Figma for inactive shift banner yet"
+          }
+        }
+      }
+    },
+    {
+      "id": "take-in-progress-order-modal",
+      "label": "Take order in progress confirmation modal",
+      "app": {
+        "path": "/shift/1",
+        "waitForGone": "loading",
+        "mockEnv": {
+          "VITE_USE_SHIFT_MOCK": "true",
+          "VITE_USE_SHIFT_MOCK_VARIANT": "serving",
+          "VITE_USE_ORDER_MOCK": "true"
+        },
+        "screenshotTarget": "[data-testid='take-in-progress-order-modal'] .ant-modal-container",
+        "openSteps": [
+          { "clickTestId": "orders-queue-row-1" },
+          { "clickTestId": "order-drawer-action-takeInProgress" }
+        ]
+      },
+      "figma": {
+        "fileKey": "unsaved-mrax59yu-8l5wwvi8",
+        "variants": {
+          "light-desktop": { "nodeId": "1008:15566" },
+          "dark-desktop": { "nodeId": "1008:15583" },
+          "light-mobile": {
+            "skip": true,
+            "reason": "No mobile frame in Figma for take-in-progress-order modal yet"
+          },
+          "dark-mobile": {
+            "skip": true,
+            "reason": "No mobile frame in Figma for take-in-progress-order modal yet"
+          }
+        }
+      }
+    },
+    {
+      "id": "return-to-pool-order-modal",
+      "label": "Release order (return to pool) confirmation modal",
+      "app": {
+        "path": "/shift/1",
+        "waitForGone": "loading",
+        "mockEnv": {
+          "VITE_USE_SHIFT_MOCK": "true",
+          "VITE_USE_SHIFT_MOCK_VARIANT": "serving",
+          "VITE_USE_ORDER_MOCK": "true"
+        },
+        "screenshotTarget": "[data-testid='return-to-pool-order-modal'] .ant-modal-container",
+        "openSteps": [
+          { "clickTestId": "orders-queue-tab-label-in_progress" },
+          { "clickTestId": "orders-queue-row-5" },
+          { "clickTestId": "order-drawer-action-returnToNew" }
+        ]
+      },
+      "figma": {
+        "fileKey": "unsaved-mrax59yu-8l5wwvi8",
+        "variants": {
+          "light-desktop": { "nodeId": "769:25352" },
+          "dark-desktop": { "nodeId": "769:35363" },
+          "light-mobile": {
+            "skip": true,
+            "reason": "No mobile frame in Figma for return-to-pool-order modal yet"
+          },
+          "dark-mobile": {
+            "skip": true,
+            "reason": "No mobile frame in Figma for return-to-pool-order modal yet"
+          }
+        }
+      }
+    },
+    {
+      "id": "mark-ready-order-modal",
+      "label": "Order ready for pickup confirmation modal",
+      "app": {
+        "path": "/shift/1",
+        "waitForGone": "loading",
+        "mockEnv": {
+          "VITE_USE_SHIFT_MOCK": "true",
+          "VITE_USE_SHIFT_MOCK_VARIANT": "serving",
+          "VITE_USE_ORDER_MOCK": "true"
+        },
+        "screenshotTarget": "[data-testid='mark-ready-order-modal'] .ant-modal-container",
+        "openSteps": [
+          { "clickTestId": "orders-queue-tab-label-in_progress" },
+          { "clickTestId": "orders-queue-row-5" },
+          { "clickTestId": "order-drawer-action-markReady" }
+        ]
+      },
+      "figma": {
+        "fileKey": "unsaved-mrax59yu-8l5wwvi8",
+        "variants": {
+          "light-desktop": { "nodeId": "769:25448" },
+          "dark-desktop": { "nodeId": "769:35450" },
+          "light-mobile": {
+            "skip": true,
+            "reason": "No mobile frame in Figma for mark-ready-order modal yet"
+          },
+          "dark-mobile": {
+            "skip": true,
+            "reason": "No mobile frame in Figma for mark-ready-order modal yet"
+          }
+        }
+      }
+    },
+    {
+      "id": "cancel-order-modal",
+      "label": "Cancel order modal",
+      "app": {
+        "path": "/shift/1",
+        "waitForGone": "loading",
+        "mockEnv": {
+          "VITE_USE_SHIFT_MOCK": "true",
+          "VITE_USE_SHIFT_MOCK_VARIANT": "serving",
+          "VITE_USE_ORDER_MOCK": "true",
+          "VITE_USE_CANCELLATION_REASON_MOCK": "true"
+        },
+        "screenshotTarget": "[data-testid='cancel-order-modal']",
+        "openSteps": [
+          { "clickTestId": "orders-queue-row-1" },
+          { "clickTestId": "order-drawer-action-cancel" }
+        ]
+      },
+      "figma": {
+        "fileKey": "RLuwi98Gxu9yv8ljwm9AAh",
+        "variants": {
+          "light-desktop": { "nodeId": "769:25381" },
+          "dark-desktop": { "nodeId": "769:35392" },
+          "light-mobile": {
+            "skip": true,
+            "reason": "No mobile frame in Figma for cancel-order modal yet"
+          },
+          "dark-mobile": {
+            "skip": true,
+            "reason": "No mobile frame in Figma for cancel-order modal yet"
+          }
+        }
+      }
+    },
+    {
+      "id": "return-to-in-progress-order-modal",
+      "label": "Return order to work confirmation modal",
+      "app": {
+        "path": "/shift/1",
+        "waitForGone": "loading",
+        "mockEnv": {
+          "VITE_USE_SHIFT_MOCK": "true",
+          "VITE_USE_SHIFT_MOCK_VARIANT": "serving",
+          "VITE_USE_ORDER_MOCK": "true"
+        },
+        "screenshotTarget": "[data-testid='return-to-in-progress-order-modal'] .ant-modal-container",
+        "openSteps": [
+          { "clickTestId": "orders-queue-tab-label-ready" },
+          { "clickTestId": "orders-queue-row-6" },
+          { "clickTestId": "order-drawer-action-returnToInProgress" }
+        ]
+      },
+      "figma": {
+        "fileKey": "RLuwi98Gxu9yv8ljwm9AAh",
+        "variants": {
+          "light-desktop": { "nodeId": "1044:15542" },
+          "dark-desktop": { "nodeId": "1044:15559" },
+          "light-mobile": {
+            "skip": true,
+            "reason": "No mobile frame in Figma for return-to-in-progress-order modal yet"
+          },
+          "dark-mobile": {
+            "skip": true,
+            "reason": "No mobile frame in Figma for return-to-in-progress-order modal yet"
+          }
+        }
+      }
+    },
+    {
+      "id": "remind-order-modal",
+      "label": "Remind order client confirmation modal",
+      "app": {
+        "path": "/shift/1",
+        "waitForGone": "loading",
+        "mockEnv": {
+          "VITE_USE_SHIFT_MOCK": "true",
+          "VITE_USE_SHIFT_MOCK_VARIANT": "serving",
+          "VITE_USE_ORDER_MOCK": "true"
+        },
+        "screenshotTarget": "[data-testid='remind-order-modal'] .ant-modal-container",
+        "openSteps": [
+          { "clickTestId": "orders-queue-tab-label-ready" },
+          { "clickTestId": "orders-queue-row-6" },
+          { "clickTestId": "order-drawer-action-invite-client" }
+        ]
+      },
+      "figma": {
+        "fileKey": "unsaved-mrwai5lm-92cvzr4h",
+        "variants": {
+          "light-desktop": { "nodeId": "1:71731" },
+          "dark-desktop": { "nodeId": "1:59550" },
+          "light-mobile": {
+            "skip": true,
+            "reason": "No mobile frame in Figma for remind-order modal yet"
+          },
+          "dark-mobile": {
+            "skip": true,
+            "reason": "No mobile frame in Figma for remind-order modal yet"
+          }
+        }
+      }
+    },
+    {
+      "id": "complete-order-modal",
+      "label": "Complete order confirmation modal",
+      "app": {
+        "path": "/shift/1",
+        "waitForGone": "loading",
+        "mockEnv": {
+          "VITE_USE_SHIFT_MOCK": "true",
+          "VITE_USE_SHIFT_MOCK_VARIANT": "serving",
+          "VITE_USE_ORDER_MOCK": "true",
+          "VITE_ORDER_MOCK_COMPLETE_UNPAID": "true"
+        },
+        "screenshotTarget": "[data-testid='complete-order-modal'] .ant-modal-container",
+        "openSteps": [
+          { "clickTestId": "orders-queue-tab-label-ready" },
+          { "clickTestId": "orders-queue-row-6" },
+          { "clickTestId": "order-drawer-action-complete" }
+        ]
+      },
+      "figma": {
+        "fileKey": "unsaved-mrwai5lm-92cvzr4h",
+        "variants": {
+          "light-desktop": { "nodeId": "1:63875" },
+          "dark-desktop": { "nodeId": "1:59592" },
+          "light-mobile": { "nodeId": "1:71776" },
+          "dark-mobile": { "nodeId": "1:59654" }
+        }
+      }
+    },
+    {
+      "id": "workspace-current-shift-active",
+      "label": "Workspace / CurrentShiftCard active",
+      "app": {
+        "path": "/workspace",
+        "waitForGone": "loading",
+        "mockEnv": {
+          "VITE_USE_SHIFT_MOCK": "true",
+          "VITE_USE_SHIFT_MOCK_VARIANT": "active"
+        },
+        "screenshotTarget": "[data-testid='current-shift-card']"
+      },
+      "figma": {
+        "fileKey": "unsaved-mrax59yu-8l5wwvi8",
+        "variants": {
+          "light-desktop": { "nodeId": "797:14170" },
+          "dark-desktop": { "nodeId": "797:14420" },
+          "light-mobile": { "nodeId": "797:14330" },
+          "dark-mobile": {
+            "skip": true,
+            "reason": "Dark mobile card node TBD; full page 797:15044 times out in figma-bridge"
+          }
+        }
+      }
+    },
+    {
+      "id": "workspace-current-shift-inactive",
+      "label": "Workspace / CurrentShiftCard inactive",
+      "app": {
+        "path": "/workspace",
+        "waitForGone": "loading",
+        "mockEnv": {
+          "VITE_USE_SHIFT_MOCK": "true",
+          "VITE_USE_SHIFT_MOCK_VARIANT": "inactive"
+        },
+        "screenshotTarget": "[data-testid='current-shift-card']"
+      },
+      "figma": {
+        "fileKey": "unsaved-mrax59yu-8l5wwvi8",
+        "variants": {
+          "light-desktop": { "nodeId": "335:12634" },
+          "dark-desktop": { "nodeId": "843:14105" },
+          "light-mobile": {
+            "skip": true,
+            "reason": "No dedicated inactive mobile card frame in Figma"
+          },
+          "dark-mobile": {
+            "skip": true,
+            "reason": "No dedicated inactive mobile card frame in Figma"
+          }
+        }
+      }
+    },
+    {
+      "id": "order-drawer-edit-tooltip",
+      "label": "Order drawer / edit disabled tooltip",
+      "app": {
+        "path": "/shift/1",
+        "waitForGone": "loading",
+        "mockEnv": {
+          "VITE_USE_SHIFT_MOCK": "true",
+          "VITE_USE_SHIFT_MOCK_VARIANT": "serving",
+          "VITE_USE_ORDER_MOCK": "true"
+        },
+        "screenshotTarget": ".ant-tooltip",
+        "openSteps": [
+          { "clickTestId": "orders-queue-tab-label-in_progress" },
+          { "clickTestId": "orders-queue-row-5" }
+        ],
+        "waitFor": "Редактирование доступно"
+      },
+      "figma": {
+        "fileKey": "unsaved-mrmemfr4-z9tnsw2z",
+        "variants": {
+          "light-desktop": { "nodeId": "108:7834" },
+          "dark-desktop": { "nodeId": "289:11203" },
+          "light-mobile": {
+            "skip": true,
+            "reason": "Tooltip component set is desktop-only in Figma"
+          },
+          "dark-mobile": {
+            "skip": true,
+            "reason": "Tooltip component set is desktop-only in Figma"
+          }
+        }
+      }
+    }
+  ]
+}

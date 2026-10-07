@@ -1,0 +1,79 @@
+---
+description: Button — CTA primary/secondary/ghost для workspace
+globs: "**/*.{tsx,scss}"
+alwaysApply: false
+---
+
+# Button
+
+Figma: node `282:6541`, fileKey `unsaved-mq6o84g6-aflw3u1l` ([макет](https://www.figma.com/design/RLuwi98Gxu9yv8ljwm9AAh/%D0%9B%D0%BE%D0%B3%D0%BE%D1%82%D0%B8%D0%BF?node-id=282-6541)).
+
+## Когда использовать
+
+- Любая CTA-кнопка в workspace/shift — только `Button` из `shared/ui`
+- Не импортировать `Button` из `antd` напрямую в pages/widgets/features (workspace)
+- Не дублировать `.breakButton`, `.startButton`, `.retryButton`, `.primaryButton` в локальном SCSS
+
+```tsx
+import { Button } from 'shared/ui';
+
+<Button variant="primary" data-testid="shift-btn-end">
+  {t('endShift')}
+</Button>
+
+<Button variant="secondary" flex onClick={onRetry} data-testid="shift-btn-retry">
+  {t('retry')}
+</Button>
+```
+
+## Варианты
+
+| Variant | Визуал | Где |
+|---------|--------|-----|
+| `primary` | Заливка brand | Завершить смену, начать смену, submit |
+| `secondary` | Рамка + фон | Перерыв, отмена, retry, load more |
+| `ghost` | Без рамки | Текстовые CTA без акцента, icon-only actions |
+| `link` | Текстовая ссылка, hover — только смена цвета текста, без underline | Field links в AppealDrawer, nav cards, inline navigation |
+
+Figma link (Ghost в component set): default `282:6548` / `283:6647`, hover `282:6550` / `283:6649`.
+
+## Геометрия
+
+Единый размер по Figma: **35px** height, padding `10px 20px`, border-radius **8px**. Задаётся в `Button.module.scss` через `--btn-*` (не в глобальном ant theme JSON — marketing/dashboard используют свои antd-кнопки).
+
+## Props
+
+| Prop | Назначение |
+|------|------------|
+| `variant` | `primary` \| `secondary` \| `ghost` \| `link` (default: `primary`) |
+| `flex` | `flex: 1` в парных action-рядах (заменяет локальный `.actionButton`) |
+| `minWidth` | минимальная ширина (например Load More: `120`) |
+| `shape` | default: `'default'` (radius 8px); не полагаться на ConfigProvider `button.shape` |
+| `block` | full width (antd) |
+| `loading`, `disabled`, `htmlType`, `icon` | пробрасываются в antd |
+
+## Токены
+
+| Token group | Файл |
+|-------------|------|
+| `--btn-primary-*`, `--btn-secondary-*`, `--btn-ghost-*`, `--btn-link-*`, геометрия | `shared/styles/_button.scss` + `Button.module.scss` |
+| `link` variant | `Button.module.scss` `.variantLink` — auto height, no padding, `--btn-link-text`, `--btn-link-text-hover` |
+
+Цвета в feature-SCSS не хардкодить. Для antd 6 border-hover без flash — override `--ant-btn-border-color*` в variant-классах `Button.module.scss`.
+
+## Вне scope
+
+- `iconButton`, `editWindowButton` — icon-only
+- `filterTabButton` — табы
+- `locationCard`, `mobileRow` — кликабельные карточки/строки
+- `closeButton` — icon close в модалках (antd `Button type="text"`)
+- Маркетинговые кнопки лендинга (до отдельной миграции)
+
+## Test id
+
+Обязателен для QA-видимых кнопок: `data-testid={TEST_ID...}` (ручная проверка, см. `project-stack.mdc`).
+
+## Запрещено
+
+- Импортировать `Button` из внутренних путей — только `shared/ui`
+- Переопределять `:global .ant-btn` цвета в page/widget SCSS

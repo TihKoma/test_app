@@ -1,0 +1,83 @@
+---
+description: Формы, features, widgets — композиция сценариев
+globs: "**/{features,widgets,pages}/**/*.{ts,tsx}"
+alwaysApply: false
+---
+
+# Features, widgets, pages
+
+## Разделение
+
+- **feature** — один сценарий (форма, список, превью). Без привязки к конкретному drawer/page layout
+- **widget** — собирает features + entities (drawer с кнопками submit/cancel)
+- **page** — data-init (`useEffect` → `*Model.init()`), layout, локальный UI state (открыт drawer)
+
+## Формы
+
+`react-hook-form` + `FormProvider`. Поля — обёртки в `shared/ui/components` на базе Ant Design (`Input`, `Switch`, `Select` + `useController`).
+
+```tsx
+const form = useForm<TWallpaperFormData>({ defaultValues: { ... } });
+<form id={WALLPAPER_FORM_ID} onSubmit={handleSubmit(onSubmit)}>
+```
+
+Кнопка submit вне формы (в footer drawer): `htmlType="submit"` + `form={WALLPAPER_FORM_ID}` (Ant Design `Button`).
+
+Константа `FORM_ID` — в `const/` слайса.
+
+## Куда выносить бизнес-логику (decision tree)
+
+1. **Загрузка данных** → `entities/*/model` (`*Model.fetch*`, inline-ошибки в store)
+2. **Мутация + user feedback** (notification):
+   - переиспользуется или группа действий → `features/*/model` (например `shiftControlModel.startShift`)
+   - единственный потребитель (pages-first) → `pages/<Page>/model`
+   - самодостаточный widget → `widgets/<Widget>/model`
+3. **Page hooks** (`pages/**/lib/hooks`) → только lifecycle и UI-последствия (reset form, close modal), **без** `handleError` / `getNotificationApi` / прямых вызовов API
+
+## Ошибки в submit
+
+`handleError` и success-notification — в **model слайса-владельца сценария** (`features/model`, `widgets/model`, `pages/<Page>/model`), не в page hooks:
+
+```ts
+// features/shift-control/model/useShiftControlStore.ts
+} catch (error) {
+  handleError({
+    error,
+    message: t('startFailed'),
+    block: 'features.shiftControl.startShift',
+  });
+}
+```
+
+Самодостаточный widget допустим (пример `widgets.AddCompanyModal`):
+
+```ts
+} catch (error) {
+  handleError({
+    error,
+    message: t('saveFailed'),
+    block: 'widgets.AddCompanyModal.handleSubmit',
+  });
+}
+```
+
+## Зависимости feature
+
+- `entities/*` — данные и actions
+- `shared/*` — UI, const, lib
+- другие `features/*` — допустимо
+- не импортировать `pages/*` или `widgets/*`
+
+## Page init
+
+```tsx
+useEffect(() => {
+  void wallpaperModel.init();
+}, []);
+```
+
+Локальные модалки/hooks — в `pages/<Page>/lib/`.
+
+## Минимальный diff
+
+Новый сценарий: entity (api+store) → feature (ui) → widget (оболочка) → page (композиция). Не пропускайте слой «ради скорости».

@@ -1,0 +1,101 @@
+---
+description: Универсальная обработка ошибок через handleError и Ant Design notification
+globs: "**/*.{ts,tsx}"
+alwaysApply: false
+---
+
+# Обработка ошибок
+
+## Обязательно
+
+Для user-facing ошибок в `catch` используйте `handleError` из `shared/lib/errors`:
+
+```ts
+import { handleError } from 'shared/lib/errors';
+
+try {
+  await saveOrganization(data);
+} catch (error) {
+  handleError({
+    error,
+    message: t('saveFailed'),
+    block: 'widgets.AddCompanyModal.handleSubmit',
+  });
+}
+```
+
+`handleError`:
+- парсит текст через `getApiErrorMessage` (Axios `detail` / `message` / validation);
+- показывает `notification.error` (Ant Design 6: `title` + `description`);
+- логирует в консоль при переданном `block`;
+- возвращает итоговую строку ошибки.
+
+## Запрещено для user-facing ошибок
+
+- `message.error` / `message.open` для ошибок API в `catch`
+- `showMessage({ type: 'error' })` для ошибок API в `catch` — только `handleError`
+- статический `notification.error()` из `antd` (без ConfigProvider context)
+- только `console.error` без `handleError`
+
+## Краткие toast (message)
+
+Для кратких подтверждений (success / info / warning / loading) используйте `showMessage` из `shared/ui`:
+
+```ts
+import { showMessage } from 'shared/ui';
+
+showMessage({ type: 'success', content: t('saved') });
+
+const hideLoading = showMessage({ type: 'loading', content: t('saving') });
+hideLoading?.();
+```
+
+`showMessage({ type: 'error' })` — только для локальных UX-сообщений (валидация, «не найден ID»), **не** для API-ошибок.
+
+**Запрещено в новом коде:** прямой `message.open` / `message.useMessage` из `antd`. Holder — в `AppThemeProvider`.
+
+## Когда не показывать notification
+
+Если ошибка отображается inline в UI (store state, empty state, banner):
+
+```ts
+const errorMessage = handleError({
+  error,
+  message: t('loadFailed'),
+  block: 'entities.Shift.useShiftStore.fetchCurrentShift',
+  showNotification: false,
+});
+
+setState({ currentError: errorMessage });
+```
+
+## Слой и `block`-префиксы
+
+| Слой | Формат `block` | `showNotification` |
+|------|----------------|-------------------|
+| entities | `entities.<Entity>.use<Entity>Store.<action>` | `false` (inline в store) |
+| features | `features.<Feature>.<action>` | `true` (по умолчанию) |
+| pages/model | `pages.<Page>.<action>` | `true` для мутаций |
+| widgets/model | `widgets.<Widget>.<action>` | `true` (по умолчанию) |
+| pages/hooks | — | **запрещено** при entity API |
+
+**Запрещено:** `handleError` / `getNotificationApi` в `pages/**/lib/hooks` при работе с entity API. Допустимо в `pages/<Page>/model/`.
+
+**Запрещено:** success/error notifications в `entities/model` — только `showNotification: false` и запись в state.
+
+## Параметры
+
+| Параметр | Описание |
+|----------|----------|
+| `error` | Пойманная ошибка (`unknown`) |
+| `message` | Переведённый fallback, если API не вернул текст |
+| `title` | Заголовок notification (опционально; по умолчанию «Ошибка» / «Error») |
+| `block` | Контекст для `console.error`, например `entities.Shift.useShiftStore.fetchCurrentShift` |
+| `showNotification` | `false` — только парсинг и лог, без notification |
+
+## Инфраструктура
+
+`notification.useNotification` и `message.useMessage` с `contextHolder` монтируются в [`AppThemeProvider`](src/app/providers/AppThemeProvider.tsx) внутри `ConfigProvider` — наследуют тему и локаль.
+
+- Ошибки API → `handleError` → `getNotificationApi()`
+- Краткие toast → `showMessage` → `getMessageApi()` из `shared/lib/message` (см. `shared/ui/Message`)

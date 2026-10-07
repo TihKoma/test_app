@@ -1,0 +1,43 @@
+---
+description: Performance optimization guidelines
+globs:
+alwaysApply: true
+---
+# Performance
+
+## Mandatory Standards (MUST)
+- Do not store large objects or arrays in component state unnecessarily
+- Use memoization (React.memo, useMemo, useCallback) for heavy computations and renders
+- Avoid unnecessary re-renders due to incorrect effect dependencies
+- Optimize resource loading (lazy loading, preloading)
+- Minimize the number of DOM repaints
+
+## Recommendations (SHOULD)
+- Break down large components into smaller ones
+- Use lazy loading for heavy modules and components
+- Apply virtualization for long lists
+- Use web workers for heavy computations
+- Optimize bundle size (tree-shaking, code-splitting)
+
+## Examples
+```tsx
+// ✅ Correct
+const memoizedValue = useMemo(() => computeHeavy(data), [data]);
+
+const HeavyComponent = React.lazy(() => import('./HeavyComponent'));
+
+function MyComponent() {
+  return (
+    <React.Suspense fallback={<Spinner />}>
+      <HeavyComponent />
+    </React.Suspense>
+  );
+}
+
+// ❌ Incorrect
+const value = computeHeavy(data);
+
+function MyComponent() {
+  const HeavyComponent = require('./HeavyComponent').default;
+  return <HeavyComponent />;
+}

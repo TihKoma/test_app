@@ -1,0 +1,8 @@
+{
+  "datePicker": {
+    "variant": "borderless"
+  },
+  "timePicker": {
+    "variant": "borderless"
+  }
+}
