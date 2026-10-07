@@ -1,6 +1,6 @@
 # test-app
 
-Frontend на стеке momentum (`queue-online-admin`): Vite 7, React 19, TypeScript, Ant Design 6.
+Frontend на стеке: Vite 7, React 19, TypeScript, Ant Design 6.
 
 ## Требования
 
